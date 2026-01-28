@@ -7,6 +7,12 @@
   width: 520px;
 }
 
+.conteiner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .nutritional_values {
   display: flex;
   justify-content: space-between;

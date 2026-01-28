@@ -3,14 +3,16 @@ import { FC } from 'react';
 import styles from './constructor-page.module.css';
 
 import { ConstructorPageUIProps } from './type';
-import { Preloader } from '@ui';
-import { BurgerIngredients, BurgerConstructor } from '@components';
+import { Preloader } from '../../preloader';
+import { BurgerConstructor, BurgerIngredients } from '@components';
+import { useSelector } from 'react-redux';
+import { selectIngredientsStatus } from '../../../../../src/features/burgers/ingredients-selectors';
 
 export const ConstructorPageUI: FC<ConstructorPageUIProps> = ({
   isIngredientsLoading
 }) => (
   <>
-    {isIngredientsLoading ? (
+    {false ? (
       <Preloader />
     ) : (
       <main className={styles.containerMain}>

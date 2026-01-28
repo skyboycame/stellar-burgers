@@ -1,11 +1,28 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Preloader } from '../ui/preloader';
 import { IngredientDetailsUI } from '../ui/ingredient-details';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from '@store';
+import {
+  selectIngredientById,
+  selectIngredientsStatus
+} from '@features/burgers/ingredients-selectors';
+import { fetchIngredients } from '@features/burgers/ingredients-slice';
 
 export const IngredientDetails: FC = () => {
   /** TODO: взять переменную из стора */
-  const ingredientData = null;
+  const { id } = useParams<{ id: string }>();
+  const ingredientData = useSelector((state) =>
+    selectIngredientById(state, id || null)
+  );
+  const dispatch = useDispatch();
+  const status = useSelector(selectIngredientsStatus);
 
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch(fetchIngredients());
+    }
+  }, [dispatch, status]);
   if (!ingredientData) {
     return <Preloader />;
   }
