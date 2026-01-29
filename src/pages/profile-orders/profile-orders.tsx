@@ -13,7 +13,6 @@ export const ProfileOrders: FC = () => {
   const dispatch = useDispatch();
   console.log(orders);
   useEffect(() => {
-    dispatch(fetchIngredients());
     dispatch(fetchFeeds());
     dispatch(getOrders());
   }, [dispatch]);

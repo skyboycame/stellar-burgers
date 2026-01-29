@@ -15,10 +15,6 @@ export const Feed: FC = () => {
     dispatch(fetchFeeds());
   };
 
-  useEffect(() => {
-    dispatch(fetchFeeds());
-    dispatch(fetchIngredients());
-  }, [dispatch]);
   if (!orders.length) {
     return <Preloader />;
   }

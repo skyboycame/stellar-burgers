@@ -17,12 +17,6 @@ export const OrderInfo: FC = () => {
     selectOrderByNumber(state, orderNumber)
   );
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (!orderData) {
-      dispatch(fetchIngredients());
-      dispatch(fetchFeeds());
-    }
-  }, [dispatch]);
   const ingredients: TIngredient[] = useSelector(selectIngredientsList);
 
   /* Готовим данные для отображения */

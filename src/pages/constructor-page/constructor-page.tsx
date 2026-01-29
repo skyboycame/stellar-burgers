@@ -18,13 +18,6 @@ export const ConstructorPage: FC = () => {
   const dispatch = useDispatch();
 
   const status = useSelector(selectIngredientsStatus);
-
-  useEffect(() => {
-    if (status === 'idle') {
-      dispatch(fetchIngredients());
-    }
-  }, [dispatch, status]);
-
   return (
     <>
       {isIngredientsLoading ? (

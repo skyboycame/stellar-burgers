@@ -43,7 +43,12 @@ export const loginUser = createAsyncThunk<
   { rejectValue: string }
 >('@@user/login', async (data, { rejectWithValue }) => {
   try {
-    return await loginUserApi(data);
+    const response = await loginUserApi(data);
+
+    setCookie('accessToken', response.accessToken);
+    localStorage.setItem('refreshToken', response.refreshToken);
+
+    return response;
   } catch {
     return rejectWithValue('Ошибка авторизации');
   }
@@ -55,7 +60,12 @@ export const registerUser = createAsyncThunk<
   { rejectValue: string }
 >('@@user/register', async (data, { rejectWithValue }) => {
   try {
-    return await registerUserApi(data);
+    const response = await registerUserApi(data);
+
+    setCookie('accessToken', response.accessToken);
+    localStorage.setItem('refreshToken', response.refreshToken);
+
+    return response;
   } catch {
     return rejectWithValue('Ошибка регистрации');
   }
@@ -79,7 +89,12 @@ export const logoutUser = createAsyncThunk<
   { rejectValue: string }
 >('@@user/logout', async (_, { rejectWithValue }) => {
   try {
-    return await logoutApi();
+    const response = await logoutApi();
+
+    localStorage.removeItem('refreshToken');
+    deleteCookie('accessToken');
+
+    return response;
   } catch {
     return rejectWithValue('Ошибка Выхода(logout)');
   }
@@ -114,9 +129,6 @@ const userSlice = createSlice({
         state.user = action.payload.user;
         state.isAuthenticated = true;
         state.isAuthChecked = true;
-
-        setCookie('accessToken', action.payload.accessToken);
-        localStorage.setItem('refreshToken', action.payload.refreshToken);
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loginRequest = false;
@@ -135,9 +147,6 @@ const userSlice = createSlice({
         state.user = action.payload.user;
         state.isAuthenticated = true;
         state.isAuthChecked = true;
-
-        setCookie('accessToken', action.payload.accessToken);
-        localStorage.setItem('refreshToken', action.payload.refreshToken);
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.registerRequest = false;
@@ -170,8 +179,6 @@ const userSlice = createSlice({
         state.isAuthChecked = true;
         state.user = null;
         state.isAuthenticated = false;
-        localStorage.removeItem('refreshToken');
-        deleteCookie('accessToken');
       })
       .addCase(logoutUser.rejected, (state) => {
         state.isAuthenticated = false;

@@ -81,11 +81,9 @@ const orderSlice = createSlice({
         state.ingredients[index] = temp;
       }
     },
-    clearOrder: (state) => {
+    clearOrderModal: (state) => {
       state.orderData = null;
       state.status = 'idle';
-      state.ingredients = [];
-      state.bun = null;
     }
   },
   extraReducers: (builder) => {
@@ -98,6 +96,8 @@ const orderSlice = createSlice({
         state.status = 'received';
         state.error = null;
         state.orderData = action.payload;
+        state.bun = null;
+        state.ingredients = [];
       })
       .addCase(sendOrder.rejected, (state, action) => {
         state.status = 'rejected';
@@ -125,6 +125,6 @@ export const {
   deleteIngredients,
   moveUpIngredient,
   moveDownIngredient,
-  clearOrder
+  clearOrderModal
 } = orderSlice.actions;
 export const orderReducer = orderSlice.reducer;

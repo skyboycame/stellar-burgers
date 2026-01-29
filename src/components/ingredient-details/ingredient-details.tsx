@@ -15,14 +15,8 @@ export const IngredientDetails: FC = () => {
   const ingredientData = useSelector((state) =>
     selectIngredientById(state, id || null)
   );
-  const dispatch = useDispatch();
   const status = useSelector(selectIngredientsStatus);
 
-  useEffect(() => {
-    if (status === 'idle') {
-      dispatch(fetchIngredients());
-    }
-  }, [dispatch, status]);
   if (!ingredientData) {
     return <Preloader />;
   }

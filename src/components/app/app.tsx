@@ -18,6 +18,7 @@ import { ProtectedRoute } from '../protected-route';
 import { useEffect } from 'react';
 import { checkAuthUser } from '@features/user/user-slice';
 import { useDispatch } from '@store';
+import { fetchIngredients } from '@features/burgers/ingredients-slice';
 
 const App = () => {
   const location = useLocation();
@@ -30,6 +31,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(checkAuthUser());
+    dispatch(fetchIngredients());
   }, [dispatch]);
 
   return (
