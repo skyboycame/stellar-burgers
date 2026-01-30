@@ -19,6 +19,7 @@ import { useEffect } from 'react';
 import { checkAuthUser } from '@features/user/user-slice';
 import { useDispatch } from '@store';
 import { fetchIngredients } from '@features/burgers/ingredients-slice';
+import { fetchFeeds } from '@features/feed/feed-slice';
 
 const App = () => {
   const location = useLocation();
@@ -32,6 +33,7 @@ const App = () => {
   useEffect(() => {
     dispatch(checkAuthUser());
     dispatch(fetchIngredients());
+    dispatch(fetchFeeds());
   }, [dispatch]);
 
   return (

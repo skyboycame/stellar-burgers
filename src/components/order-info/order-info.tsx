@@ -19,6 +19,12 @@ export const OrderInfo: FC = () => {
   const dispatch = useDispatch();
   const ingredients: TIngredient[] = useSelector(selectIngredientsList);
 
+  useEffect(() => {
+    if (!ingredients) {
+      dispatch(fetchIngredients());
+      dispatch(fetchFeeds());
+    }
+  }, []);
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {
     if (!orderData || !ingredients.length) return null;
