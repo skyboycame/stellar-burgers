@@ -13,7 +13,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
 import { deleteCookie, setCookie } from '../../../src/utils/cookie';
 
-interface UserState {
+export interface UserState {
   user: TUser | null;
   isAuthenticated: boolean;
   isAuthChecked: boolean;

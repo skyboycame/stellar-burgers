@@ -2,7 +2,7 @@ import { getFeedsApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TOrder, TOrdersData, TStatus } from '@utils-types';
 
-interface ininitalFeedState {
+export interface ininitalFeedState {
   status: TStatus;
   error: null | string;
   ordersData: TOrdersData;

@@ -10,7 +10,7 @@ import { orderReducer } from '../../src/features/order/order-slice';
 import { feedReducer } from '@features/feed/feed-slice';
 import { userReducer } from '@features/user/user-slice';
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
   order: orderReducer,
   feed: feedReducer,
