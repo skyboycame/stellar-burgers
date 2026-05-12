@@ -1,0 +1,9 @@
+{
+  "refreshToken": "fakeRefreshToken",
+  "accessToken": "fakeAccessToken",
+  "user": {
+    "email": "test@test.com",
+    "name": "Mikhail"
+  }
+
+}
